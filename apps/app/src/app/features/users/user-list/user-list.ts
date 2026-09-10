@@ -22,7 +22,7 @@ import { UsersActions } from '../../../store/users/users.actions';
 import { AuthActions } from '../../../store/auth/auth.actions';
 import { selectAllUsers, selectUsersLoading } from '../../../store/users/users.selectors';
 import { User, JobRole } from '../../../shared/models/user.model';
-import { UserFormComponent } from '../user-form/user-form';
+import { UserForm } from '../user-form/user-form';
 
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout'
 import { toSignal } from '@angular/core/rxjs-interop'
@@ -49,7 +49,7 @@ interface RoleOption {
     SelectModule,
     IconFieldModule,
     InputIconModule,
-    UserFormComponent,
+    UserForm,
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './user-list.html',

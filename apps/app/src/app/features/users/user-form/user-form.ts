@@ -32,7 +32,7 @@ interface RoleOption {
   ],
   templateUrl: './user-form.html',
 })
-export class UserFormComponent implements OnChanges {
+export class UserForm implements OnChanges {
   @Input() visible = false;
   @Input() user: User | null = null;
   @Output() closed = new EventEmitter<void>();
