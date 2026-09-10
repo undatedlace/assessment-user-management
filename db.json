@@ -1,10 +1,324 @@
 {
   "users": [
-    { "id": "1", "username": "johndoe", "email": "john@example.com", "job-role": "tech" },
-    { "id": "2", "username": "janedoe", "email": "jane@example.com", "job-role": "qa" },
-    { "id": "3", "username": "bobsmith", "email": "bob@example.com", "job-role": "gd" }
+    {
+      "id": "1",
+      "username": "johndoe",
+      "email": "john@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "2",
+      "username": "janedoe",
+      "email": "jane@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "3",
+      "username": "bobsmith",
+      "email": "bob@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "4",
+      "username": "alicejohnson",
+      "email": "alice@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "5",
+      "username": "charliebrown",
+      "email": "charlie@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "6",
+      "username": "davidwilson",
+      "email": "david@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "7",
+      "username": "emilydavis",
+      "email": "emily@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "8",
+      "username": "frankmiller",
+      "email": "frank@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "9",
+      "username": "gracewilson",
+      "email": "grace@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "10",
+      "username": "henrymoore",
+      "email": "henry@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "11",
+      "username": "isabellataylor",
+      "email": "isabella@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "12",
+      "username": "jackanderson",
+      "email": "jack@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "13",
+      "username": "karenmartin",
+      "email": "karen@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "14",
+      "username": "liamthompson",
+      "email": "liam@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "15",
+      "username": "miascott",
+      "email": "mia@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "16",
+      "username": "noahgarcia",
+      "email": "noah@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "17",
+      "username": "oliviamartinez",
+      "email": "olivia@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "18",
+      "username": "ethanrobinson",
+      "email": "ethan@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "19",
+      "username": "sophiaclark",
+      "email": "sophia@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "20",
+      "username": "masonrodriguez",
+      "email": "mason@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "21",
+      "username": "avawalker",
+      "email": "ava@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "22",
+      "username": "jameshall",
+      "email": "james@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "23",
+      "username": "charlotteallen",
+      "email": "charlotte@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "24",
+      "username": "benjaminyoung",
+      "email": "benjamin@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "25",
+      "username": "ameliahernandez",
+      "email": "amelia@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "26",
+      "username": "lucasKing",
+      "email": "lucas@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "27",
+      "username": "harperlopez",
+      "email": "harper@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "28",
+      "username": "henryhill",
+      "email": "henry.hill@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "29",
+      "username": "evelynadams",
+      "email": "evelyn@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "30",
+      "username": "alexanderbaker",
+      "email": "alexander@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "31",
+      "username": "abigailnelson",
+      "email": "abigail@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "32",
+      "username": "danielcarter",
+      "email": "daniel@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "33",
+      "username": "ellaMitchell",
+      "email": "ella@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "34",
+      "username": "matthewperez",
+      "email": "matthew@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "35",
+      "username": "scarletroberts",
+      "email": "scarlett@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "36",
+      "username": "josephturner",
+      "email": "joseph@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "37",
+      "username": "victoriaphillips",
+      "email": "victoria@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "38",
+      "username": "samuelcampbell",
+      "email": "samuel@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "39",
+      "username": "lilyparker",
+      "email": "lily@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "40",
+      "username": "christopherEvans",
+      "email": "christopher@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "41",
+      "username": "sofiamitchell",
+      "email": "sofia@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "42",
+      "username": "andrewedwards",
+      "email": "andrew@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "43",
+      "username": "ellagriffin",
+      "email": "ella.g@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "44",
+      "username": "joshuastewart",
+      "email": "joshua@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "45",
+      "username": "chloesanchez",
+      "email": "chloe@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "46",
+      "username": "ryanMorris",
+      "email": "ryan@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "47",
+      "username": "zoerogers",
+      "email": "zoe@example.com",
+      "job-role": "qa"
+    },
+    {
+      "id": "48",
+      "username": "nathanreed",
+      "email": "nathan@example.com",
+      "job-role": "gd"
+    },
+    {
+      "id": "49",
+      "username": "hannahcook",
+      "email": "hannah@example.com",
+      "job-role": "tech"
+    },
+    {
+      "id": "50",
+      "username": "calebmorgan",
+      "email": "caleb@example.com",
+      "job-role": "qa"
+    },
+    {
+      "username": "Ismail",
+      "email": "Ismail@32345.com",
+      "job-role": "tech",
+      "id": "GfvD2fjg_wo"
+    },
+    {
+      "username": "Chup Be",
+      "email": "chupbe@gmail.com",
+      "job-role": "tech",
+      "id": "VoiMSgoa_3o"
+    }
   ],
   "credentials": [
-    { "id": "1", "username": "admin", "password": "admin123" }
-  ]
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
