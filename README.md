@@ -1,102 +1,85 @@
-# UserManagement
+# User Management App
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Angular + NgRx + Optimus UI(PrimeNG) + Tailwind + json-server, built inside an Nx monorepo.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+---
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Tech Stack
 
-## Run tasks
+| Layer             | Technology                  |
+|-------------------|-----------------------------|
+| Frontend          | Angular (latest), Standalone Components |
+| State Management  | NgRx (Entity, Effects, Selectors) |
+| UI                | PrimeNG + Tailwind CSS      |
+| Backend (mock)    | json-server                 |
+| Monorepo          | Nx Workspace                |
+| Tests             | Jest                        |
 
-To run the dev server for your app, use:
+---
 
-```sh
-npx nx serve app
-```
+## Project Setup
 
-To create a production bundle:
+### 1. Install dependencies
+npm install
 
-```sh
-npx nx build app
-```
+### 2. Start mock backend
+npm run json-server
+Runs at: http://localhost:3000
 
-To see all available targets to run for a project, run:
+### 3. Start Angular app
+nx serve app
+Runs at: http://localhost:4200
 
-```sh
-npx nx show project app
-```
+### 4. Run both together
+npm run start:all (requires concurrently)
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+---
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Demo Credentials
 
-## Add new projects
+Username: admin  
+Password: admin123
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+---
 
-Use the plugin's generator to create new projects.
+## Running Tests
 
-To generate a new application, use:
+nx test app
 
-```sh
-npx nx g @nx/angular:app demo
-```
+---
 
-To generate a new library, use:
+## Architecture
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+### Store
+store/
+  auth/         → login state, auth actions/reducer/effects/selectors
+  users/        → NgRx Entity for CRUD, users actions/reducer/effects/selectors
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+### Features
+features/
+  auth/login/   → LoginComponent (mock auth form)
+  users/
+    user-list/  → Dashboard table with edit/delete
+    user-form/  → Dialog for add/edit
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Core
+core/
+  guards/       → authGuard (protects /users route)
+  services/     → AuthService, UserService
 
-## Set up CI!
+### Shared
+shared/models/  → User interface, JobRole type
 
-### Step 1
+---
 
-To connect to Nx Cloud, run the following command:
+## API Endpoints (json-server)
 
-```sh
-npx nx connect
-```
+GET    /users
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+POST   /users
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+PUT    /users/:id
 
-### Step 2
+DELETE /users/:id
 
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+GET    /credentials?username=&password=
