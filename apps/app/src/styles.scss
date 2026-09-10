@@ -1,3 +1,23 @@
 @import "tailwindcss";
 
 @import "primeicons/primeicons.css"; 
+
+:host ::ng-deep {
+  /* Safely strip legacy structural grid background blocks on small screens */
+  @media (max-width: 767px) {
+    .p-datatable-table {
+      border-collapse: unset !important; /* Frees block margins */
+    }
+    
+    .p-datatable-tbody > tr {
+      background: transparent !important;
+      
+      > td {
+        background: transparent !important;
+        border: none !important; 
+      }
+    }
+
+    
+  }
+}

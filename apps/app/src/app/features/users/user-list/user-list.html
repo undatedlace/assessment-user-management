@@ -1,0 +1,266 @@
+<div class="min-h-screen bg-gray-50">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-sm px-6 py-4  flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <i class="pi pi-users !text-3xl md:!text-2xl text-blue-500"></i>
+      <h1 class="text-xl font-bold text-gray-800 hidden md:block">User Management</h1>
+    </div>
+    <div class="flex gap-2">
+      <p-button [size]="'small'" label="Add User" icon="pi pi-plus" (onClick)="openAddDialog()" />
+      <p-button [size]="'small'" label="Logout" icon="pi pi-sign-out" severity="secondary" (onClick)="logout()" />
+    </div>
+  </header>
+
+  <main class="p-6">
+    <p-toast />
+    <p-confirmDialog [style]="{ width: '400px' }" />
+
+    <h1 class="text-xl font-bold text-gray-800 md:hidden mb-4">User Management</h1>
+
+
+    <div class="bg-white rounded-xl shadow-sm p-2 md:p-4 flex flex-col gap-4">
+
+      <!-- Global Search Bar -->
+      <div class="flex items-center justify-between gap-4 flex-wrap">
+
+        <p-iconfield class="w-full max-w-sm">
+          <p-inputicon styleClass="pi pi-search" />
+          <input
+            pInputText
+            type="text"
+            [(ngModel)]="globalFilter"
+            (input)="onGlobalFilter($event)"
+            placeholder="Search users..."
+            class="w-full"
+          />
+        </p-iconfield>
+
+        <div class="flex items-center gap-2">
+          @if (globalFilter || columnFilters.username || columnFilters.email || columnFilters.jobRole) {
+            <p-button
+              label="Clear Filters"
+              icon="pi pi-filter-slash"
+              severity="secondary"
+              size="small"
+              (onClick)="clearAllFilters()"
+            />
+          }
+          <span class="text-sm text-gray-400">
+            Search across username, email, and role
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Table -->
+      <p-table
+        #dt
+        [value]="(users$ | async) || []"
+        [loading]="(loading$ | async) ?? false"
+        [globalFilterFields]="globalFilterFields"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[5, 10, 25]"
+        [showCurrentPageReport]="true"
+        [currentPageReportTemplate]="isMobile() ? '' : 'Showing {first} to {last} of {totalRecords} users'"       
+        styleClass="p-datatable-striped p-datatable-gridlines"
+        responsiveLayout="scroll"
+        [size]="'small'"
+        [pageLinks]="isMobile() ? 2 : 5"     
+      >
+
+        <!-- Column Headers -->
+        <ng-template pTemplate="header">
+
+          <!-- Header Labels Row -->
+          <tr class="hidden md:table-row bg-zinc-50 border-b border-zinc-200">
+            <th pSortableColumn="username">
+              Username <p-sortIcon field="username" />
+            </th>
+            <th pSortableColumn="email">
+              Email <p-sortIcon field="email" />
+            </th>
+            <th pSortableColumn="job-role">
+              Role <p-sortIcon field="job-role" />
+            </th>
+            <th class="text-center w-32">Actions</th>
+          </tr>
+
+          <!-- Column Filter Row -->
+          <tr class="hidden md:table-row bg-zinc-50 border-b border-zinc-200">
+
+            <!-- Username Filter -->
+            <th>
+              <p-iconfield class="w-full">
+                <p-inputicon styleClass="pi pi-filter text-xs" />
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="columnFilters.username"
+                  (input)="onColumnFilter(columnFilters.username, 'username')"
+                  placeholder="Filter username"
+                  class="w-full text-sm"
+                />
+              </p-iconfield>
+            </th>
+
+            <!-- Email Filter -->
+            <th>
+              <p-iconfield class="w-full">
+                <p-inputicon styleClass="pi pi-filter text-xs" />
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="columnFilters.email"
+                  (input)="onColumnFilter(columnFilters.email, 'email')"
+                  placeholder="Filter email"
+                  class="w-full text-sm"
+                />
+              </p-iconfield>
+            </th>
+
+            <!-- Role Filter -->
+            <th>
+              <p-select
+                [(ngModel)]="columnFilters.jobRole"
+                [options]="roleFilterOptions"
+                optionLabel="label"
+                optionValue="value"
+                placeholder="All Roles"
+                styleClass="w-full text-sm"
+                (onChange)="onRoleFilter(columnFilters.jobRole)"
+              />
+            </th>
+
+            <!-- Empty Actions Cell -->
+            <th></th>
+
+          </tr>
+        </ng-template>
+
+        <!-- Body -->
+        <ng-template pTemplate="body" let-user>
+          
+          <!-- 1. DESKTOP ROW: Normal table layout on screens md and up -->
+          <tr class="hidden md:table-row border-b border-zinc-100 hover:bg-zinc-50">
+            <td>
+              <div class="flex items-center gap-2">
+                <span class="pi pi-user text-gray-400"></span>
+                <span class="font-medium">{{ user.username }}</span>
+              </div>
+            </td>
+            <td>{{ user.email }}</td>
+            <td>
+              <p-tag
+                [value]="getRoleLabel(user['job-role'])"
+                [severity]="getRoleSeverity(user['job-role'])"
+              />
+            </td>
+            <td>
+              <div class="flex gap-1 justify-center">
+                <p-button
+                  icon="pi pi-pencil"
+                  severity="info"
+                  [rounded]="true"
+                  [text]="true"
+                  pTooltip="Edit user"
+                  tooltipPosition="top"
+                  (onClick)="openEditDialog(user)"
+                />
+                <p-button
+                  icon="pi pi-trash"
+                  severity="danger"
+                  [rounded]="true"
+                  [text]="true"
+                  pTooltip="Delete user"
+                  tooltipPosition="top"
+                  (onClick)="confirmDelete(user)"
+                />
+              </div>
+            </td>
+          </tr>
+
+          <!-- 2. MOBILE CARD ROW: Completely isolated block layout row with consistent borders -->
+          <tr class="block md:hidden mb-4">
+            <td colspan="4" class="block p-0 border-0!">
+              <div class="border border-zinc-200 rounded-xl p-5 bg-white shadow-xs">
+                
+                <!-- Card Header -->
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-semibold text-lg text-zinc-950">{{ user.username }}</span>
+                  <p-tag [severity]="getRoleSeverity(user['job-role'])" [value]="getRoleLabel(user['job-role'])" />
+                </div>
+                
+                <!-- Card Contact info -->
+                <span class="block text-sm text-zinc-500 mb-4">{{ user.email }}</span>
+                
+                <!-- Card Actions -->
+                <div class="border-t border-zinc-100 pt-4 flex justify-end gap-2">
+                  <p-button 
+                    label="Edit" 
+                    icon="pi pi-pencil" 
+                    size="small" 
+                    [outlined]="true" 
+                    severity="secondary" 
+                    class="flex-1" 
+                    (onClick)="openEditDialog(user)" 
+                  />
+                  <p-button 
+                    label="Delete" 
+                    icon="pi pi-trash" 
+                    size="small" 
+                    severity="danger" 
+                    class="flex-1" 
+                    (onClick)="confirmDelete(user)" 
+                  />
+                </div>
+
+              </div>
+            </td>
+          </tr>
+
+        </ng-template>
+
+        <!-- Dynamic Empty State Template -->
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4" class="p-0 border-0!">
+              
+              @if (globalFilter || columnFilters.email || columnFilters.username || columnFilters.jobRole) {
+                <!-- STATE A: Active search criteria returned nothing -->
+                <div class="flex flex-col items-center py-12 text-zinc-400">
+                  <i class="pi pi-search text-5xl mb-3 text-zinc-300"></i>
+                  <p class="font-medium text-zinc-700">No users match your search</p>
+                  <p class="text-sm mt-1">Try adjusting or clearing your filters</p>
+                  <p-button
+                    label="Clear Filters"
+                    icon="pi pi-filter-slash"
+                    severity="secondary"
+                    size="small"
+                    class="mt-4"
+                    (onClick)="clearAllFilters()"
+                  />
+                </div>
+              } @else {
+                <!-- STATE B: The API returned an empty list -->
+                <div class="text-center py-12 text-zinc-400 font-medium">
+                  No users found.
+                </div>
+              }
+
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </div>
+  </main>
+  
+   <!-- User Form Dialog -->
+  <app-user-form
+    [visible]="showDialog"
+    [user]="selectedUser"
+    (closed)="onDialogClose()"
+  />
+</div>
