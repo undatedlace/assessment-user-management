@@ -17,10 +17,13 @@ import Aura from '@openng/optimus-ui-themes/aura';
 
 // reducers
 import { authFeature } from './store/auth/auth.reducer';
+import { usersFeature } from './store/users/users.reducer';
 
 
 //effects
 import * as authEffects from './store/auth/auth.effects';
+import * as usersEffects from './store/users/users.effects';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,8 +32,9 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore({
       [authFeature.name]: authFeature.reducer,
+      [usersFeature.name]: usersFeature.reducer,
     }),
-    provideEffects([authEffects]),
+    provideEffects([authEffects, usersEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: false }),
     provideOptimus({
       theme: {
